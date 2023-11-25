@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Example</title>
+</head>
+<body>
+
+  <div id="app">
+    <ul><h1> Art Styles</h1></ul>
+    <li v-for="value in artStyles" @click="deleteItem"> {{ value }}</li>
+    <label>
+        <input type="text" id="input" v-model="newArtStyle">
+        <button @click="addItem">Add Item</button>
+    </label>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        artStyles: [
+            'Realism',
+            'Impressionism',
+            'Cubism',
+            'Surrealism',
+            'Minimalism'
+        ]
+      },
+      methods: {
+        addItem() {
+            let value = document.querySelector("#input").value
+            this.artStyles.push(value)
+            this.newArtStyle = ''
+
+        },
+        deleteItem(event) {
+            this.artStyles.splice((this.artStyles.indexOf(event.target.innerText)), 1)
+        }
+      }
+    });
+  </script>
+
+  <style>
+    li{
+        cursor: pointer;
+        max-width: fit-content;
+        min-width: 250px;
+    }
+  </style>
+
+</body>
+</html>

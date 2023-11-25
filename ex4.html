@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Example</title>
+</head>
+<body>
+
+  <div id="app">
+    <label>
+      <p>Your Username : </p>
+      <input type="text" v-model="newUsername" @input="usernameTyping">
+      <article>{{ usernameAlert }}</article>
+    </label>
+    <label>
+        <p>Your Email : </p>
+        <input type="email" v-model="newEmail" @input="emailTyping">
+        <article>{{ emailAlert }}</article>
+    </label>
+    <label>
+        <p>Your Password : </p>
+        <input type="password" v-model = "newPassword" @input="passwordTyping">
+        <article>{{ passwordAlert }}</article>
+    </label>
+    <button :disabled = submitDis >Submit</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        newUsername: '',
+        newEmail: '',
+        newPassword: '',
+        usernameAlert: '',
+        emailAlert: '',
+        passwordAlert: '',
+        submitDis: true
+      },
+      methods: {
+        usernameTyping(event) {
+            this.newUsername = event.target.value
+            if(event.target.value === ''){
+              this.usernameAlert = 'Username is empty'
+            }else{
+              this.usernameAlert = ''
+            }
+            this.submitClicked()
+        },
+        emailTyping(event) {
+            this.newEmail = event.target.value
+            if(!event.target.value.includes('@gmail.com') && !event.target.value.includes('@mail.ru')){
+              this.emailAlert = 'email must contain "@gmail.com" or "@mail.ru"'
+            }else{
+              this.emailAlert = ''
+            }
+            this.submitClicked()
+        },
+        passwordTyping(event) {
+            this.newPassword = event.target.value
+            if(event.target.value.length < 8){
+              this.passwordAlert = 'password length is shorter than 8'
+            }else{
+              this.passwordAlert = ''
+            }
+            this.submitClicked()
+        },
+        submitClicked() {
+          if(this.usernameAlert === '' && this.emailAlert === '' && this.passwordAlert === ''){
+            if(this.newUsername === '' || this.newEmail === '' || this.newPassword === ''){
+              this.submitDis = true   
+            }else{
+            this.submitDis = false
+            }
+          }else{
+            this.submitDis = true
+          }
+        },
+      }
+    });
+  </script>
+
+  <style>
+    article{
+      color: red;
+      margin-bottom: 10px;
+    }
+  </style>
+
+</body>
+</html>

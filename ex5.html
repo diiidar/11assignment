@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Example</title>
+</head>
+<body>
+
+  <div id="app">
+    <ul><h1> Tasks To Do</h1></ul>
+    <li v-for="(value, index, array) in todo" id="li"> 
+        <article>{{ value }}</article>
+        <input type="checkbox" @click="lineItem(index)">
+    </li>
+    <label>
+        <input type="text" id="input" v-model="newTask">
+        <button @click="addTask">Add Task</button>
+    </label>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todo: [
+            'Go To Market',
+            'Make Dinner',
+            'Do HomeWork',
+            'Vacuum the room',
+            'Sleep'
+        ],
+        newTask: ''
+      },
+      methods: {
+        addTask() {
+            let value = document.querySelector("#input").value
+            this.todo.push(value)
+            this.newTask = ''
+
+        },
+        lineItem(index) {
+             const lis = document.querySelectorAll(`li`)
+             const li = lis[index]
+             const article = li.querySelector('article')
+             const checkbox = li.querySelector('input')
+             if(checkbox.checked){
+                article.classList.add('toLine')
+                this.needLine = !this.needLine
+             }else{
+                article.classList.remove('toLine')
+                this.needLine = !this.needLine
+             }
+        }
+      }
+    });
+  </script>
+
+  <style>
+    li{
+        cursor: pointer;
+        max-width: fit-content;
+        min-width: 250px;
+        display: flex;
+    }
+    article{
+        width: 80%;
+    }
+    .toLine{
+        text-decoration-line: line-through;
+    }
+  </style>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Example</title>
+</head>
+<body>
+
+  <div id="app">
+    <label>
+        <h2>Welcome back, {{ username }}</h2>
+        <input type="text" @input="inputTyping" v-model="newName">
+    </label>
+    <button @click="toDefault">To Default</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        username: 'Didar'
+      },
+      methods: {
+        inputTyping(event) {
+            this.username = event.target.value
+        },
+        toDefault() {
+            this.username = 'Didar'
+            this.newName = ''
+        }
+      }
+    });
+    /*submitClicked() {
+            const passVal = document.querySelector('#password').value
+            if(passVal == '' || this.newPassword.length < 8){
+                this.needAlert = true
+            }
+        }
+        <label>
+      <p>Your Username : </p>
+      <input type="text" v-model="newUsername"> 
+    </label>
+    <label>
+        <p>Your Email : </p>
+        <input type="email" v-model="newEmail">
+    </label>
+    <p>{{newEmail}}</p>
+    <label>
+        <p>Your Password : </p>
+        <input type="password" v-model = "newPassword" id="password">
+    </label>
+    <button @click="submitClicked" disabled = {{ needAlert }}>Submit</button>
+    <div class="alertDiv"`>
+
+    </div>*/
+  </script>
+
+  <style>
+    
+  </style>
+
+</body>
+</html>
